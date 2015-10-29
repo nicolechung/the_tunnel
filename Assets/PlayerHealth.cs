@@ -7,7 +7,8 @@ public class PlayerHealth : MonoBehaviour {
 	public int startingHealth = 100;
 	public int currentHealth;
 	public Slider healthSlider;
-	public AudioClip deathClip;
+	public AudioSource deathClip;
+	public AudioSource hurtClip;
 	public Canvas gameOver;
 	public Canvas HUD;
 	public GameObject damage;
@@ -21,6 +22,7 @@ public class PlayerHealth : MonoBehaviour {
 	void Awake () {
 		currentHealth = startingHealth;
 		damageImage = damage.GetComponent<Image>();
+		
 	}
 	
 	// Update is called once per frame
@@ -44,8 +46,7 @@ public class PlayerHealth : MonoBehaviour {
 		
 		healthSlider.value = currentHealth;
 		
-		// play hurt sound
-		// playerAudio.Play();
+		hurtClip.Play ();
 		
 		if (currentHealth <= 0 && !isDead) 
 		{
@@ -57,8 +58,9 @@ public class PlayerHealth : MonoBehaviour {
 		isDead = true;
 		
 		// Set the audiosource to play the death clip and play it (this will stop the hurt sound from playing).
-		// playerAudio.clip = deathClip;
-		// playerAudio.Play ();
+		
+		// play hurt sound
+		deathClip.Play();
 		
 		StopGame();
 	}
